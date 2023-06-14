@@ -318,3 +318,7 @@ Google translate
     left: 50%;
     transform: translate(-50%,-60%);
 }
+
+.tab-content .tab-pane video{
+    height: 400px;
+}
