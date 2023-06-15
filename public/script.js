@@ -87,17 +87,41 @@ for (let i = 0; i < getlengthId.length; i++) {
 }
 //--------------------------------------------------------------//
 //--------------------------Video show--------------------------//
-$(document).ready(function() {
-    $('.youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-        disableOn: 700,
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
+// $(document).ready(function() {
+//     $('.youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+//         disableOn: 700,
+//         type: 'iframe',
+//         mainClass: 'mfp-fade',
+//         removalDelay: 160,
+//         preloader: false,
 
-        fixedContentPos: false
-    });
-});
+//         fixedContentPos: false
+//     });
+// });
+
+
+const allPopupVideo = document.querySelectorAll('.tab-content .tab-pane a');
+const popupAddCart = document.getElementById('popupAddCart');
+if(allPopupVideo && popupAddCart){
+    allPopupVideo.forEach(item => {
+        if(item.dataset.target == '#popupAddCart'){
+            item.onclick = (event) => {
+                event.preventDefault();
+                // modal.style.display = "block";
+                var video = item.querySelector('video source');
+                if(video){
+                    var src = video.getAttribute('src');
+                    var popupSrc = popupAddCart.querySelector('video source');
+                    var videoPopup = popupAddCart.querySelector('video');
+
+                    popupSrc.setAttribute('src', src);
+                    videoPopup.load();
+                    videoPopup.play();
+                }
+            }
+        }
+    })
+}
 
 //--------------------------------------------------------//
 let slider = document.querySelectorAll('.splide__slide .tab-content video');
@@ -127,7 +151,6 @@ window.addEventListener('scroll', function(event){
     // }else{
     //     header.classList.remove('sticky')
     // }
-
 
 
     offset = window.pageYOffset
